@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=">
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>​</title>
+    <style>
+        :root {
+    --primary: #fc2651;
+    --primary-hover: #e91e47;
+    --primary-light: rgba(252, 38, 81, 0.1);
+    --primary-lighter: rgba(252, 38, 81, 0.05);
+    --accent: #8b5cf6;
+    --accent-light: rgba(139, 92, 246, 0.1);
+    --success: #10b981;
+    --warning: #f59e0b;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --text-light: #9ca3af;
+    --bg: #ffffff;
+    --bg-secondary: #f8fafc;
+    --surface: #ffffff;
+    --surface-hover: #f1f5f9;
+    --border: #e2e8f0;
+    --border-light: #f1f5f9;
+    --glass: rgba(255, 255, 255, 0.8);
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --shadow-glow: 0 0 20px rgba(252, 38, 81, 0.3);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --gradient-primary: linear-gradient(135deg, #fc2651 0%, #e91e47 100%);
+    --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+    --gradient-surface: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+}
+.dark-mode {
+    --primary: #0f266a;
+    --primary-hover: #48dcfc;
+    --primary-light: rgba(252, 38, 81, 0.15);
+    --primary-lighter: rgba(252, 38, 81, 0.08);
+    --accent: #a855f7;
+    --accent-light: rgba(168, 85, 247, 0.15);
+    --success: #34d399;
+    --warning: #fbbf24;
+    --text: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-light: #64748b;
+    
+    --bg: #000000;
+    --bg-secondary: #111c3c;
+    --surface: #0a0f1d;
+    --surface-hover: #161f30;
+    --border: #1e293b;
+    --border-light: #334155;
+    --glass: rgba(0, 0, 0, 0.85);
+    
+    --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.6);
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.7), 0 1px 2px -1px rgb(0 0 0 / 0.7);
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.7), 0 2px 4px -2px rgb(0 0 0 / 0.7);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.8), 0 4px 6px -4px rgb(0 0 0 / 0.8);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.9), 0 8px 10px -6px rgb(0 0 0 / 0.9);
+    --shadow-glow: 0 0 20px rgba(252, 38, 81, 0.3);
+    --gradient-primary: linear-gradient(135deg, #111f4e 0%, #0f266a 100%);
+    --gradient-accent: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+    
+    /* Darkened gradient surface for card layouts */
+    --gradient-surface: linear-gradient(135deg, #0a0f1d 0%, #161f30 100%);
+}
+
+  
+
+body.theme-ocean {
+    --primary: #3b82f6; --primary-hover: #60a5fa;
+    --primary-light: rgba(59,130,246,0.15); --primary-lighter: rgba(59,130,246,0.08);
+    --gradient-primary: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+    --shadow-glow: 0 0 20px rgba(59,130,246,0.4);
+}
+body.theme-emerald {
+    --primary: #10b981; --primary-hover: #34d399;
+    --primary-light: rgba(16,185,129,0.15); --primary-lighter: rgba(16,185,129,0.08);
+    --gradient-primary: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+    --shadow-glow: 0 0 20px rgba(16,185,129,0.4);
+}
+body.theme-violet {
+    --primary: #8b5cf6; --primary-hover: #a78bfa;
+    --primary-light: rgba(139,92,246,0.15); --primary-lighter: rgba(139,92,246,0.08);
+    --gradient-primary: linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%);
+    --shadow-glow: 0 0 20px rgba(139,92,246,0.4);
+}
+body.theme-sunset {
+    --primary: #f97316; --primary-hover: #fb923c;
+    --primary-light: rgba(249,115,22,0.15); --primary-lighter: rgba(249,115,22,0.08);
+    --gradient-primary: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    --shadow-glow: 0 0 20px rgba(249,115,22,0.4);
+}
+body.theme-rose {
+    --primary: #ec4899; --primary-hover: #f472b6;
+    --primary-light: rgba(236,72,153,0.15); --primary-lighter: rgba(236,72,153,0.08);
+    --gradient-primary: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+    --shadow-glow: 0 0 20px rgba(236,72,153,0.4);
+}
+body.theme-cyan {
+    --primary: #06b6d4; --primary-hover: #22d3ee;
+    --primary-light: rgba(6,182,212,0.15); --primary-lighter: rgba(6,182,212,0.08);
+    --gradient-primary: linear-gradient(135deg, #06b6d4 0%, #22d3ee 100%);
+    --shadow-glow: 0 0 20px rgba(6,182,212,0.4);
+}
+body.theme-amber {
+    --primary: #f59e0b; --primary-hover: #fbbf24;
+    --primary-light: rgba(245,158,11,0.15); --primary-lighter: rgba(245,158,11,0.08);
+    --gradient-primary: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+    --shadow-glow: 0 0 20px rgba(245,158,11,0.4);
+}
+body.theme-red {
+    --primary: #ef4444; --primary-hover: #f87171;
+    --primary-light: rgba(239,68,68,0.15); --primary-lighter: rgba(239,68,68,0.08);
+    --gradient-primary: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+    --shadow-glow: 0 0 20px rgba(239,68,68,0.4);
+}
+body.theme-lime {
+    --primary: #84cc16; --primary-hover: #a3e635;
+    --primary-light: rgba(132,204,22,0.15); --primary-lighter: rgba(132,204,22,0.08);
+    --gradient-primary: linear-gradient(135deg, #84cc16 0%, #a3e635 100%);
+    --shadow-glow: 0 0 20px rgba(132,204,22,0.4);
+}
+body.theme-teal {
+    --primary: #14b8a6; --primary-hover: #2dd4bf;
+    --primary-light: rgba(20,184,166,0.15); --primary-lighter: rgba(20,184,166,0.08);
+    --gradient-primary: linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%);
+    --shadow-glow: 0 0 20px rgba(20,184,166,0.4);
+}
+body.theme-sky {
+    --primary: #0ea5e9; --primary-hover: #38bdf8;
+    --primary-light: rgba(14,165,233,0.15); --primary-lighter: rgba(14,165,233,0.08);
+    --gradient-primary: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 100%);
+    --shadow-glow: 0 0 20px rgba(14,165,233,0.4);
+}
+body.theme-indigo {
+    --primary: #6366f1; --primary-hover: #818cf8;
+    --primary-light: rgba(99,102,241,0.15); --primary-lighter: rgba(99,102,241,0.08);
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
+    --shadow-glow: 0 0 20px rgba(99,102,241,0.4);
+}
+body.theme-fuchsia {
+    --primary: #d946ef; --primary-hover: #e879f9;
+    --primary-light: rgba(217,70,239,0.15); --primary-lighter: rgba(217,70,239,0.08);
+    --gradient-primary: linear-gradient(135deg, #d946ef 0%, #e879f9 100%);
+    --shadow-glow: 0 0 20px rgba(217,70,239,0.4);
+}
+body.theme-navy {
+    --primary: #172554; --primary-hover: #1e3a8a;
+    --primary-light: rgba(23,37,84,0.15); --primary-lighter: rgba(23,37,84,0.08);
+    --gradient-primary: #172554;
+    --shadow-glow: 0 0 20px rgba(23,37,84,0.4);
+}
+.theme-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0.5rem 0 1.25rem;
+}
+.theme-swatch {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    background: var(--sw);
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.theme-swatch:hover { transform: scale(1.12); }
+.theme-swatch.active {
+    border-color: var(--surface);
+    box-shadow: 0 0 0 2px var(--sw);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    background-image:
+		linear-gradient(rgba(255, 255, 255, 0.05) 2px, transparent 2px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.05) 2px, transparent 2px);
+    background-size: 75px 75px;
+	z-index: -999;
+    color: var(--text);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+header {
+    background: var(--gradient-primary);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem; /* Slightly reduced gap to preserve space */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  max-width: 100%;
+  height: auto;
+  -webkit-mask-image: linear-gradient(135deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 100%);
+  mask-image: linear-gradient(135deg, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.logo svg {
+  display: block;
+  height: 40px;
+  width: auto;
+  max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  .logo svg {
+    height: 34px;
+  }
+}
+
+
+.search-container {
+    display: flex;
+    flex: 1;
+    max-width: 500px;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+.search-container > button {
+    background: var(--glass);
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0.5rem;
+    height: 44px;
+    width: 44px;
+    min-width: 44px; /* Fixes button size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0; /* Keeps button inside the container */
+    backdrop-filter: blur(20px);
+    color: #ffffff;
+}
+
+
+#searchBar {
+    flex: 1;
+    min-width: 0;
+    padding: 0.8rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+}
+
+#searchBar:focus {
+    background: var(--surface);
+    border-color: transparent;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), var(--shadow);
+    transform: translateY(-1px);
+    color: var(--text);
+}
+
+#searchBar::placeholder {
+    color: var(--text-muted);
+}
+
+#sortOptions,
+#filterOptions {
+    padding: 0.8rem 2.5rem 0.8rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius);
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: var(--text-muted);
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-width: 130px;
+    box-shadow: var(--shadow-sm);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+}
+
+#sortOptions:hover,
+#filterOptions:hover {
+    background-color: var(--surface-hover);
+    border-color: rgba(255, 255, 255, 0.28);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
+    color: var(--text);
+}
+
+#sortOptions option,
+#filterOptions option {
+    background: var(--surface);
+    color: var(--text);
+}
+
+.control-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+main {
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    padding-bottom: 6rem;
+}
+
+#zoneCount {
+    margin: 0 0 1.5rem;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#zoneCount::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--primary);
+}
+
+#container,
+#featuredZones {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.zone-item {
+    background: var(--gradient-primary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+}
+
+.zone-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--accent);
+}
+
+.zone-item:hover::before {
+    opacity: 1;
+}
+
+.zone-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary-light);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.zone-item img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    display: block;
+    background: var(--border-light);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.zone-item:hover img {
+    transform: scale(1.05);
+}
+
+.zone-item button {
+    width: 100%;
+    margin: 0;
+    padding: 0.45rem 0.75rem;
+    background: transparent;
+    color: var(--text);
+    border: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13.5px;
+    line-height: 1.25;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 2.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.zone-title-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    width: 100%;
+}
+
+.zone-item:hover button {
+    color: var(--text);
+    border-top-color: var(--primary);
+    background: transparent;
+}
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.zone-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.4rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-lg);
+}
+
+.zone-title {
+    flex: 1;
+    min-width: 0;
+}
+
+#zoneName {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem;
+    line-height: 1.3;
+}
+
+#zoneId {
+    display: none;
+}
+
+
+#popupOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.popup {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 520px;
+    max-height: 80vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    animation: slideInScale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideInScale {
+    from {
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.popup-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#popupTitle {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+#popupClose {
+    background: rgba(255, 255, 255, 0.1);
+    border: 0;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--radius);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    line-height: 1;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+}
+
+#popupClose:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+#popupBody {
+    padding: 1.5rem;
+    overflow-y: auto;
+    color: var(--text);
+}
+
+#popupBody input[type="text"],
+#popupBody input[type="file"] {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-secondary);
+    color: var(--text);
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+}
+
+#popupBody input[type="text"]:focus,
+#popupBody input[type="file"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
+    transform: translateY(-1px);
+}
+
+footer {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: 1rem 1rem;
+    text-align: center;
+
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+}
+
+.footer-links a:hover {
+    color: var(--primary-hover);
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .search-container {
+        width: 100%;
+        max-width: none;
+    }
+
+    main {
+        padding: 1.5rem 1rem;
+    }
+
+    #container,
+    #featuredZones {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .zone-item button {
+        padding: 0.3rem 0.6rem;
+        height: 2.4rem;
+        font-size: 12.5px;
+    }
+
+    .footer-links {
+        gap: 1.5rem;
+    }
+}
+/* Compact Grid Layout */
+#container.view-compact {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 0.8rem;
+}
+
+#container.view-compact .zone-item button {
+    height: 2.2rem;
+    font-size: 11px;
+    padding: 0.2rem 0.4rem;
+}
+
+/* Minimal List Layout */
+#container.view-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#container.view-list .zone-item {
+    flex-direction: row;
+    align-items: center;
+    border-radius: var(--radius-sm);
+    padding: 0.4rem 0.8rem;
+    height: 50px;
+}
+
+#container.view-list .zone-item img {
+    width: 38px;
+    height: 38px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+#container.view-list .zone-item button {
+    border: none;
+    height: auto;
+    text-align: left;
+    justify-content: flex-start;
+    padding-left: 1rem;
+    font-size: 14px;
+}
+
+#container.view-list .zone-item:hover {
+    transform: translateX(4px); /* Subtle slide effect for list items */
+}
+
+@media (max-width: 480px) {
+    #container,
+    #featuredZones {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+    }
+
+    .popup {
+        margin: 0.5rem;
+    }
+
+    .zone-item:hover {
+        transform: translateY(-10px);
+    }
+
+}
+.control-button img {
+    transition: transform 0.4s ease;
+    width: 24px;
+    height: 24px;
+}
+
+.control-button:hover img {
+    transform: rotate(40deg);
+}
+
+.control-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+.control-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.control-buttons button {
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: white;
+    cursor: pointer;
+    padding: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.settings-button {
+    background: var(--gradient-primary);
+    color: white;
+    border: 0;
+    padding: 0.875rem 1.5rem;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    min-width: 200px;
+    width: 100%;
+    text-align: center;
+}
+
+.settings-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.settings-button:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.info-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    transition: background-color 0.2s, transform 0.2s;
+    color: inherit;
+    vertical-align: middle;
+}
+
+.info-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.info-button:active {
+    transform: scale(0.95);
+}
+
+.info-button svg {
+    display: block;
+}
+    </style>
+    <meta name="theme-color" content="#0f266a">
+</head>
+<body class="dark-mode">
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-asterisk" viewBox="0 0 16 16" aria-label="Asterisk">
+                    <path d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1"/>
+                </svg>
+               <!-- &#160;&#160;&#160;<strong>Null</strong> -->
+            </div>
+            <div class="search-container">
+                <input type="text" id="searchBar" placeholder="Search zones..." oninput="filterZones()">
+                <select id="sortOptions" onchange="sortZones()">
+                    <option value="name">Name</option>
+                    <option value="id">ID (Date)</option>
+                </select>
+                <select id="filterOptions" onchange="filterZones2()">
+                    <option value="none">Tag</option>
+                </select>
+                <button onclick="playRandomZone()" title="Play a random Zone">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dice-6-fill" viewBox="0 0 16 16">
+                        <path d="M3 0a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V3a3 3 0 0 0-3-3zm1 5.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m8 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m1.5 6.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M12 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3M5.5 12a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M4 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="control-buttons">
+                <button id="refresh" class="control-button" title="Refresh all the zones" onclick="listZones()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                    </svg>
+                </button>
+                <button id="viewToggleBtn" class="control-button" onclick="toggleLayoutView()" title="Toggle View Mode">
+                    <!-- Default Grid Icon -->
+                    <svg id="viewIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>
+                </svg>
+                </button>
+
+                <button id="settings" class="control-button" title="Settings">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+	<main>
+    <br>
+        <details id="featuredZonesWrapper" hidden>
+            <summary id="allZonesSummary" style="font-size: 1.2rem; font-weight: bold; cursor: pointer;">Featured Zones</summary>
+            <div id="featuredZones" class="zone-container"></div>
+        </details>
+        <br><hr><br>
+        <details id="allZonesWrapper" open>
+            <summary id="allSummary" style="font-size: 1.2rem; font-weight: bold; cursor: pointer;">All Zones</summary>
+            <div id="container">Loading...</div>
+        </details>
+    </main>
+
+
+    <div id="popupOverlay">
+        <div class="popup">
+            <div class="popup-header">
+                <h3 id="popupTitle">Title</h3>
+                <button id="popupClose" onclick="closePopup()">×</button>
+            </div>
+            <div id="popupBody">
+                Content will be here
+            </div>
+        </div>
+    </div>
+    <div class="footer-links">
+            <a href="javascript:saveData()">Export Data</a>
+            <a href="#" onclick="document.getElementById('importData').click(); return false;">Import Data</a>
+            <input type="file" id="importData" style="display: none;" onchange="loadData(event)">
+        </div>
+
+    <script>
+const container = document.getElementById('container');
+const searchBar = document.getElementById('searchBar');
+const sortOptions = document.getElementById('sortOptions');
+const filterOptions = document.getElementById('filterOptions');
+let zonesURL = "https://cdn.jsdelivr.net/gh/freebuisness/assets@main/zones.json";
+const coverURL = "https://cdn.jsdelivr.net/gh/freebuisness/covers@main/";
+const htmlURL = "https://cdn.jsdelivr.net/gh/freebuisness/html@main/";
+
+const ha = (base, path) => {
+    return base.replace(/\/+$/, '') + '/' + path.replace(/^\/+/, '');
+};
+
+const htmlFallbacks = [
+    "https://cdn.jsdelivr.net/gh/freebuisness/html@main/"
+];
+
+async function fetchWithFallback(urlPath) {
+    if (urlPath.startsWith("http")) {
+        const response = await fetch(urlPath + "?t=" + Date.now());
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        return await response.text();
+    }
+
+    const urlsToTry = [
+        ha(htmlURL, urlPath),
+        ...htmlFallbacks.map(fallback => ha(fallback, urlPath))
+    ];
+
+    let lastError;
+    for (const fullUrl of urlsToTry) {
+        try {
+            const response = await fetch(fullUrl + "?t=" + Date.now(), { redirect: 'follow' });
+            if (response.ok) {
+                return await response.text();
+            }
+            lastError = new Error(`HTTP error! status: ${response.status}`);
+        } catch (error) {
+            lastError = error;
+            console.warn(`Failed to fetch from ${fullUrl}, trying next...`);
+        }
+    }
+    throw lastError || new Error("All fallback URLs failed.");
+}
+
+function zoneURL(u) {
+    if (!u) return "";
+    let processed = (u + "")
+        .replace("{COVER_URL}", coverURL)
+        .replace("{HTML_URL}", htmlURL);
+
+    if (processed.startsWith("http")) {
+        return processed;
+    }
+
+    return ha(htmlURL, processed);
+}
+
+let zones = [];
+const featuredContainer = document.getElementById('featuredZones');
+
+function toTitleCase(str) {
+  return str.replace(/\w\S*/g, text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase());
+}
+
+
+async function listZones() {
+    try {
+        const response = await fetch(zonesURL + "?t=" + Date.now());
+        const json = await response.json();
+        zones = json.filter(zone => zone.id !== -1 && !zone.name.includes("COMMENTS"));
+        sortZones();
+        
+        let alltags = [];
+        for (const obj of json) {
+            if (Array.isArray(obj.special)) {
+                alltags.push(...obj.special);
+            }
+        }
+
+        alltags = [...new Set(alltags)];
+        let filteroption = document.getElementById("filterOptions");
+        if (filteroption && filteroption.children.length > 1) {
+            while (filteroption.children.length > 1) {
+                filteroption.removeChild(filteroption.lastElementChild);
+            }
+        }
+        for (const tag of alltags) {
+            const opt = document.createElement("option");
+            opt.value = tag;
+            opt.textContent = toTitleCase(tag);
+            filteroption.appendChild(opt);
+        }
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = `Error loading zones: ${error}`;
+    }
+}
+
+function sortZones() {
+    const sortBy = sortOptions.value;
+    if (sortBy === 'name') {
+        zones.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortBy === 'id') {
+        zones.sort((a, b) => a.id - b.id);
+    }
+    zones.sort((a, b) => (a.id === -1 ? -1 : b.id === -1 ? 1 : 0));
+    displayZones(zones);
+}
+
+
+function displayZones(zones) {
+    const mainContainer = document.getElementById('container');
+    mainContainer.className = `zone-grid ${views[currentViewIndex]}`;
+    mainContainer.innerHTML = "";
+    
+    zones.forEach((file) => {
+        const zoneItem = document.createElement("div");
+        zoneItem.className = "zone-item";
+        zoneItem.onclick = () => openZone(file);
+        const img = document.createElement("img");
+        img.dataset.src = zoneURL(file.cover);
+        img.alt = file.name;
+        img.loading = "lazy";
+        img.className = "lazy-zone-img";
+        zoneItem.appendChild(img);
+        const button = document.createElement("button");
+        const label = document.createElement("span");
+        label.className = "zone-title-text";
+        label.textContent = file.name;
+        button.appendChild(label);
+        button.onclick = (event) => {
+            event.stopPropagation();
+            openZone(file);
+        };
+        zoneItem.appendChild(button);
+        mainContainer.appendChild(zoneItem);   
+    });
+    if (mainContainer.innerHTML === "") {
+        mainContainer.innerHTML = "No zones found.";
+    } else {
+        document.getElementById("allSummary").textContent = `All Zones (${zones.length})`;
+    }
+
+    observeLazyImages('img.lazy-zone-img');
+}
+
+function observeLazyImages(selector) {
+    const lazyImages = document.querySelectorAll(selector);
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.remove("lazy-zone-img");
+                observer.unobserve(img);
+            }
+        });
+    }, { rootMargin: "100px", threshold: 0.1 });
+
+    lazyImages.forEach(img => imageObserver.observe(img));
+}
+
+function filterZones2() {
+    const query = filterOptions.value;
+    if (query === "none") {
+        displayZones(zones);
+    } else {
+        const filteredZones = zones.filter(zone => zone.special?.includes(query));
+        if (query.length !== 0) {
+            document.getElementById("featuredZonesWrapper").removeAttribute("open");
+        }
+        displayZones(filteredZones);
+    }
+}
+
+function filterZones() {
+    const query = searchBar.value.toLowerCase();
+    const filteredZones = zones.filter(zone => zone.name.toLowerCase().includes(query));
+    if (query.length !== 0) {
+        document.getElementById("featuredZonesWrapper").removeAttribute("open");
+    }
+    displayZones(filteredZones);
+}
+
+const BASE_TAG_RE = /<base\b[^>]*>/i;
+const BASE_HREF_RE = /<base\b[^>]*\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s">]+))[^>]*>/i;
+
+function zoneBaseFor(url, html) {
+    const folder = url.substring(0, url.lastIndexOf('/') + 1);
+    let root;
+    try { root = new URL(folder, document.baseURI).href; } catch (e) { root = folder; }
+    const m = html.match(BASE_HREF_RE);
+    const declared = m ? (m[1] !== undefined ? m[1] : m[2] !== undefined ? m[2] : m[3]) : "";
+    if (!declared) return root;
+    try { return new URL(declared, root).href; } catch (e) { return root; }
+}
+
+function injectZoneBase(html, url) {
+    const tag = '<base href="' + zoneBaseFor(url, html) + '">';
+    if (BASE_TAG_RE.test(html)) return html.replace(BASE_TAG_RE, tag);
+    if (/<head[^>]*>/i.test(html)) return html.replace(/<head[^>]*>/i, function (m) { return m + tag; });
+    if (/<html[^>]*>/i.test(html)) return html.replace(/<html[^>]*>/i, function (m) { return m + tag; });
+    return tag + html;
+}
+
+function openZone(file) {
+    let targetUrl = file.url;
+    
+    if (targetUrl.includes("{HTML_URL}")) {
+        targetUrl = targetUrl.replace("{HTML_URL}", "");
+    }
+
+    if (targetUrl.startsWith("http")) {
+        window.open(targetUrl, "_blank");
+    } else {
+        // 1. Open the window SYNCHRONOUSLY right away while user gesture is active
+        const newWindow = window.open("about:blank", "_blank");
+        if (!newWindow) {
+            alert("Your browser blocked the popup. Allow popups for this site and try again.");
+            return;
+        }
+
+        // Show a temporary loading screen inside the window
+        newWindow.document.write("<html><body style='background:#111;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;margin:0;'><h2>Loading zone...</h2><h3>if the zone doesent load soon it may be broken, this is a known issue with certain games and theres not much I can do to help fix this, sorry!</h3></body></html>");
+
+        // 2. Fetch the actual content asynchronously in the background
+        fetchWithFallback(targetUrl)
+            .then(html => {
+                // Safely resolve base URL
+                const resolvedUrl = ha(htmlURL, targetUrl);
+                html = injectZoneBase(html, resolvedUrl);
+
+                // Write the actual game code into the pre-opened window
+                newWindow.document.open();
+                newWindow.document.write(html);
+                newWindow.document.close();
+            })
+            .catch(error => {
+                newWindow.close();
+                alert("Failed to load zone from all sources: " + error);
+            });
+    }
+}
+
+
+function closePopup() {
+    document.getElementById('popupOverlay').style.display = "none";
+}
+
+HTMLCanvasElement.prototype.toDataURL = function (...args) {
+    return "";
+};
+
+function playRandomZone() {
+    if (!zones.length) return;
+    const randomIndex = Math.floor(Math.random() * zones.length);
+    openZone(zones[randomIndex]);
+}
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key === 'k')) {
+        e.preventDefault(); searchBar.focus();
+    }
+
+    if (e.key === 'Escape' && popupOpen) {
+        e.preventDefault(); closePopup();
+    }
+    if (e.key === '~' || e.key === '`') {
+        e.preventDefault();
+        if (typeof eruda !== 'undefined') {
+            if (eruda._isInit) {
+                eruda.destroy();
+            } else {
+                eruda.init({ defaults: { transparency: 0.9, theme: 'AMOLED' } });
+            }
+        }
+    }
+});
+
+const views = ['view-grid', 'view-compact', 'view-list'];
+let currentViewIndex = 0;
+
+function toggleLayoutView() {
+    const viewIcons = {
+        'view-grid': `<path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"/>`,
+        'view-compact': `<path d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1z"/>`,
+        'view-list': `<path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5m4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5m-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>`
+    };
+    
+    const mainContainer = document.getElementById('container');
+    const featured = document.getElementById('featuredZones');
+    const viewIcon = document.getElementById("viewIcon");
+    
+    mainContainer.classList.remove(views[currentViewIndex]);
+    if (featured) featured.classList.remove(views[currentViewIndex]);
+
+    currentViewIndex = (currentViewIndex + 1) % views.length;
+    const currentViewKey = views[currentViewIndex];
+
+    mainContainer.classList.add(currentViewKey);
+    if (featured) featured.classList.add(currentViewKey);
+
+    if (viewIcon && viewIcons[currentViewKey]) {
+        viewIcon.innerHTML = viewIcons[currentViewKey];
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => listZones());
+} else {
+    listZones();
+}
+
+window.addEventListener('beforeunload', function (event) {
+    event.preventDefault();
+    event.returnValue = '';
+});
+
+const THEMES = ["default", "ocean", "emerald", "violet", "sunset", "rose", "cyan", "amber", "red", "lime", "teal", "sky", "indigo", "fuchsia"];
+const PRIMARY_VARS = ["--primary", "--primary-hover", "--primary-light", "--primary-lighter", "--gradient-primary", "--shadow-glow"];
+
+function setTheme(name) {
+    if (!THEMES.includes(name)) name = "default";
+    PRIMARY_VARS.forEach(p => document.body.style.removeProperty(p));
+    THEMES.forEach(t => document.body.classList.remove("theme-" + t));
+    if (name !== "default") document.body.classList.add("theme-" + name);
+    try { localStorage.setItem("gnTheme", name); } catch (e) {}
+    document.querySelectorAll(".theme-swatch").forEach(s => s.classList.toggle("active", s.dataset.themeName === name));
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", getComputedStyle(document.body).getPropertyValue("--primary").trim() || "#fc2651");
+}
+
+function hexToRgb(hex) {
+    hex = (hex + "").replace("#", "");
+    if (hex.length === 3) hex = hex.split("").map(c => c + c).join("");
+    const n = parseInt(hex, 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+}
+
+function lightenHex(hex, amt) {
+    const [r, g, b] = hexToRgb(hex), l = c => Math.round(c + (255 - c) * amt);
+    return `rgb(${l(r)}, ${l(g)}, ${l(b)})`;
+}
+
+function setCustomTheme(hex) {
+    THEMES.forEach(t => document.body.classList.remove("theme-" + t));
+    const [r, g, b] = hexToRgb(hex), hover = lightenHex(hex, 0.22), s = document.body.style;
+    s.setProperty("--primary", hex);
+    s.setProperty("--primary-hover", hover);
+    s.setProperty("--primary-light", `rgba(${r},${g},${b},0.15)`);
+    s.setProperty("--primary-lighter", `rgba(${r},${g},${b},0.08)`);
+    s.setProperty("--gradient-primary", hex);
+    s.setProperty("--shadow-glow", `0 0 20px rgba(${r},${g},${b},0.4)`);
+    try { localStorage.setItem("gnTheme", "custom"); localStorage.setItem("gnCustom", hex); } catch (e) {}
+    document.querySelectorAll(".theme-swatch").forEach(sw => sw.classList.remove("active"));
+    const cs = document.querySelector(".custom-swatch");
+    if (cs) { cs.style.setProperty("--sw", hex); cs.classList.add("active"); }
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", hex);
+}
+
+try {
+    const savedTheme = localStorage.getItem("gnTheme") || "default";
+    if (savedTheme === "custom") setCustomTheme(localStorage.getItem("gnCustom") || "#fc2651");
+    else setTheme(savedTheme);
+    const savedDark = localStorage.getItem("gnDark");
+    if (savedDark === "1") document.body.classList.add("dark-mode");
+    else if (savedDark === "0") document.body.classList.remove("dark-mode");
+} catch (e) {}
+
+function darkMode() {
+    document.body.classList.toggle("dark-mode");
+    try { localStorage.setItem("gnDark", document.body.classList.contains("dark-mode") ? "1" : "0"); } catch (e) {}
+}
+
+function cloakIcon(url) {
+    const link = document.querySelector("link[rel~='icon']");
+    link.rel = "icon";
+    link.href = (url+"").trim().length === 0 ? "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=" : url;
+    document.head.appendChild(link);
+}
+
+function cloakName(string) {
+    document.title = (string+"").trim().length === 0 ? "​" : string;
+}
+function tabCloak() {
+    closePopup();
+    document.getElementById('popupTitle').textContent = "Tab Cloak";
+    const popupBody = document.getElementById('popupBody');
+    popupBody.innerHTML = `
+        <label for="tab-cloak-textbox" style="font-weight: bold;">Set Tab Title:</label><br>
+        <input type="text" id="tab-cloak-textbox" placeholder="Enter new tab name..." oninput="cloakName(this.value)">
+        <br><br>
+        <label style="font-weight: bold;">Set Tab Icon:</label><br>
+        <input type="text" placeholder="Enter new tab icon URL..." oninput='cloakIcon(this.value)'>
+    `;
+    popupBody.contentEditable = false;
+    document.getElementById('popupOverlay').style.display = "flex";
+}
+
+document.getElementById('settings').addEventListener('click', () => {
+    document.getElementById('popupTitle').textContent = "Settings";
+    const popupBody = document.getElementById('popupBody');
+    const swatchColors = { default:"#172554", ocean:"#3b82f6", emerald:"#10b981", violet:"#8b5cf6", sunset:"#f97316", rose:"#ec4899", cyan:"#06b6d4", amber:"#f59e0b", red:"#ef4444", lime:"#84cc16", teal:"#14b8a6", sky:"#0ea5e9", indigo:"#6366f1", fuchsia:"#d946ef" };
+    let current = "default", currentCustom = "#172554";
+    try { current = localStorage.getItem("gnTheme") || "default"; currentCustom = localStorage.getItem("gnCustom") || "#172554"; } catch (e) {}
+    const swatches = THEMES.map(n =>
+        `<button class="theme-swatch${n === current ? ' active' : ''}" data-theme-name="${n}" style="--sw:${swatchColors[n]}" title="${n}" onclick="setTheme('${n}')"></button>`
+    ).join("");
+    const customSwatch = `<label class="theme-swatch custom-swatch${current === "custom" ? ' active' : ''}" title="Custom color" style="--sw:${currentCustom}; background: conic-gradient(from 90deg, #ef4444, #f59e0b, #10b981, #06b6d4, #3b82f6, #8b5cf6, #ec4899, #ef4444); display:inline-flex; align-items:center; justify-content:center; overflow:hidden;">
+        <input type="color" value="${currentCustom}" oninput="setCustomTheme(this.value)" style="opacity:0; width:150%; height:150%; cursor:pointer; border:0; padding:0;">
+    </label>`;
+    popupBody.innerHTML = `
+        <button class="settings-button" onclick="darkMode()">Toggle Light Mode</button>
+        <div style="margin:1.25rem 0 0.4rem; font-weight:600; font-size:14px;">Accent Theme</div>
+        <div class="theme-grid">${swatches}${customSwatch}</div>
+        <button class="settings-button" onclick="tabCloak()">Tab Cloak</button>
+    `;
+    popupBody.contentEditable = false;
+    document.getElementById('popupOverlay').style.display = "flex";
+});
+</script>
+</body>
+</html>
