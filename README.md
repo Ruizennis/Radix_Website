@@ -5,3 +5,6 @@
 > * **User Accountability:** Any consequences, actions, or damages resulting from the deployment, modification, or use of this repository are solely the responsibility of the end-user. 
 > By using this you agree to these terms.
 
+
+### Eruda dev tools
+> Press "~" to enable eruda dev tools.
